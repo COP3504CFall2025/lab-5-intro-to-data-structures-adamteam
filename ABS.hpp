@@ -11,7 +11,7 @@ template<typename T>
 class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
-    ABS();
+    ABS(){}
     explicit ABS(const size_t capacity);
     ABS(const ABS& other);
     ABS& operator=(const ABS& rhs);
@@ -34,6 +34,9 @@ public:
     T peek() const override;
 
     T pop() override;
+
+    void PrintForward() const;
+    void PrintReverse() const;
 
 private:
     size_t capacity_;

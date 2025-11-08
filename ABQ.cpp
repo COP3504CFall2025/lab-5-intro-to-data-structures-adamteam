@@ -1,19 +1,19 @@
-#include "ABS.hpp"
+#pragma once
+#include "ABQ.hpp"
 #include <cstddef>
 #include <stdexcept>
-#include <iostream>
 
 using std::size_t;
 
 template<typename T>
-ABS<T>::ABS() : capacity_(1), curr_size_(0), array_(new T[1]) {}
+ABQ<T>::ABQ() : capacity(1), curr_size_(0), array_(new T[1]) {}
 
 template<typename T>
-ABS<T>::ABS(const size_t capacity) : capacity_(capacity), curr_size_(0), array_(new T[capacity]) {}
+ABQ<T>::ABQ(const size_t capacity) : capacity_(capacity), curr_size_(0), array_(new T[capacity]) {}
 
 //copy const
 template<typename T>
-ABS<T>::ABS(const ABS& other){
+ABQ<T>::ABQ(const ABQ& other){
     capacity_ = other.capacity_;
     curr_size_ = other.curr_size_;
     array_ = new T[capacity_];
@@ -24,7 +24,7 @@ ABS<T>::ABS(const ABS& other){
 
 //copy assignment
 template<typename T>
-ABS<T>& ABS<T>::operator=(const ABS& rhs){
+ABQ<T>& ABQ<T>::operator=(const ABQ& rhs){
     if (this != &rhs) {
         delete[] array_;
         capacity_ = rhs.capacity_;
@@ -36,9 +36,9 @@ ABS<T>& ABS<T>::operator=(const ABS& rhs){
     }
     return *this;
 }
-
+//move const
 template <typename T>
-ABS<T>::ABS(ABS&& other) noexcept{
+ABQ<T>::ABQ(ABQ&& other) noexcept{
     capacity_ = other.capacity_;
     curr_size_ = other.curr_size_;
     array_ = other.array_;
@@ -46,8 +46,9 @@ ABS<T>::ABS(ABS&& other) noexcept{
     other.capacity_ = 0;
     other.curr_size_ = 0;
 }
+//move assignment
 template <typename T>
-ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
+ABQ<T>& ABQ<T>::operator=(ABQ&& rhs) noexcept {
     if (this != &rhs) {
         delete[] array_;
         capacity_ = rhs.capacity_;
@@ -59,27 +60,36 @@ ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
     }
     return *this;
 }
-
+//dest
 template<typename T>
-ABS<T>::~ABS() noexcept {
+ABQ<T>::~ABQ() noexcept {
     delete[] array_;
 }
 
 template<typename T>
-size_t ABS<T>::getSize() const noexcept {
+size_t ABQ<T>::getSize() const noexcept {
     return curr_size_;
 }
 
 template<typename T>
-size_t ABS<T>::getMaxCapacity() const noexcept {
+size_t ABQ<T>::getMaxCapacity() const noexcept {
     return capacity_;
 }  
 template<typename T>
-T* ABS<T>::getData() const noexcept {
+T* ABQ<T>::getData() const noexcept {
     return array_;
 }
-template<typename T>
-void ABS<T>::push(const T& data) {
+
+template <typename T>
+T ABQ<T>::peek() const {
+    if (curr_size_ == 0) {
+        throw std::out_of_range("no top");
+    }
+    return array_[0];
+}
+
+template <typename T>
+void ABQ<T>::enqueue(const T& data) {
     if (curr_size_ >= capacity_) {
         size_t new_capacity = capacity_ * scale_factor_;
         T* new_array = new T[new_capacity];
@@ -90,39 +100,6 @@ void ABS<T>::push(const T& data) {
         array_ = new_array;
         capacity_ = new_capacity;
     }
-    curr_size_++;
-    array_[curr_size_ - 1] = data;
+    for
 }
-
-template <typename T>
-T ABS<T>::peek() const {
-    if (curr_size_ == 0) {
-        throw std::out_of_range("no top");
-    }
-    return array_[curr_size_ - 1];
-}
-
-template <typename T>
-T ABS<T>::pop() {
-    if (curr_size_ == 0) {
-        throw std::out_of_range("no top");
-    }
-    T top_item = array_[curr_size_ - 1];
-    curr_size_--;
-    return top_item;
-}
-
-template <typename T>
-void ABS<T>::PrintForward() const {
-    for (size_t i = 0; i < curr_size_; ++i) {
-        std::cout << array_[i] << " ";
-    }
-}
-template <typename T>
-void ABS<T>::PrintReverse() const {
-    for (size_t i = curr_size_- 1 ; i <= 0; ++i) {
-        std::cout << array_[i] << " ";
-    }
-}
-
 
