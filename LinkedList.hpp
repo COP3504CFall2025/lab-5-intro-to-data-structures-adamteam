@@ -89,7 +89,7 @@ public:
     count--;
     return true;
 }
-	bool LinkedList<T>::removeTail(){
+	bool removeTail(){
     if (count == 0) {
         return false;
     }
