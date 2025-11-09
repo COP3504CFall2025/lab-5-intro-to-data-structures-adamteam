@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 #include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.

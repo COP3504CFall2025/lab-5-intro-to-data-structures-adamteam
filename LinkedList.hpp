@@ -35,16 +35,16 @@ public:
 	[[nodiscard]] unsigned int getCount() const {
 		return count;
 	}
-	Node* getHead(){
+	Node<T>* getHead(){
 		return head;
 	}
-	const Node* getHead() const{
+	const Node<T>* getHead() const{
 		return head;
 	}
-	Node* getTail(){
+	Node<T>* getTail(){
 		return tail;
 	}
-	const Node* getTail() const{
+	const Node<T>* getTail() const{
 		return tail;
 	}
 
@@ -163,8 +163,8 @@ public:
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node* head;
-	Node* tail;
+	Node<T>* head;
+	Node<T>* tail;
 	unsigned int count;
 
 };
