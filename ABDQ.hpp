@@ -86,7 +86,7 @@ public:
         if (size_ == 0) throw std::runtime_error("empty");
         T data = data_[front_];
         front_ = (front_ + 1) %capacity_;
-        size--;
+        size_--;
         shrinkIfNeeded();
         return data;
     }
