@@ -87,7 +87,7 @@ public:
     // Access
     T peek() const override {
         if (curr_size_ == 0) {
-            throw std::underflow_error("empty");
+            throw std::runtime_error("empty");
         }
         return array_[0];
     }
@@ -95,7 +95,7 @@ public:
     // Deletion
     T dequeue() override {
         if (curr_size_ == 0) {
-            throw std::underflow_error("empty");
+            throw std::runtime_error("empty");
         }
         T front = array_[0];
         for (size_t t = 1; t < curr_size_; t++) {
