@@ -77,6 +77,7 @@ public:
     void pushBack(const T& item) override{
         ensureCapacity();
         back_ = (back_ + 1) % capacity_;
+        data_[back_] = item;
         size_++;
     }
 
