@@ -116,7 +116,7 @@ public:
         for (size_t i = 0; i < curr_size_; i++){
             newA[i] = array_[i];
         }
-        delete array_;
+        delete[] array_;
         array_ = newA;
         capacity_ = newC;
     }
