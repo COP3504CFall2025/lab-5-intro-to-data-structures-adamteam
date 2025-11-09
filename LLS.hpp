@@ -21,8 +21,7 @@ public:
     // Deletion
     T pop() override{
         if(list.getCount() == 0) throw std::runtime_error("empty");
-        Node<T>* head = list.getHead();
-        T data = head->data;
+        T data = list.getHead()->data;
         list.removeHead();
         return data;
     }
