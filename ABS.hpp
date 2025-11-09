@@ -67,7 +67,7 @@ public:
 
     // Get the max size of the ABS
     [[nodiscard]] size_t getMaxCapacity() const noexcept {
-        return capacity_;
+        return capacity_*scale_factor_;
     }
 
     // Return underlying data for the stack
@@ -93,14 +93,14 @@ public:
 
     T peek() const override{
     if (curr_size_ == 0) {
-        throw std::out_of_range("no top");
+        throw std::runtime_error("no top");
     }
     return array_[curr_size_ - 1];
 }
 
     T pop() override {
     if (curr_size_ == 0) {
-        throw std::out_of_range("no top");
+        throw std::runtime_error("no top");
     }
     T top_item = array_[curr_size_ - 1];
     curr_size_--;
